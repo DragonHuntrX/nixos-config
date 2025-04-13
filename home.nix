@@ -1,5 +1,12 @@
-{ config, pkgs, ...}:
-
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
+  onePassPath = "~/.1password/agent.sock";
+in
 {
   home.username = "ouroboros";
   home.homeDirectory = "/home/ouroboros";
@@ -17,11 +24,26 @@
 
   programs.helix = {
     enable = true;
-    languages.language = [{
-      name = "nix";
-      auto-format = true;
-      formatter.command = "${pkgs.nixfmt-rfc-style}/bin/nixfmt";
-    }];
+    settings = {
+      theme = "tokyonight";
+    };
+    languages.language = [
+      {
+        name = "nix";
+        auto-format = true;
+        formatter.command = "${pkgs.nixfmt-rfc-style}/bin/nixfmt";
+      }
+    ];
+  };
+
+  programs.tmux = {
+    enable = true;
+    plugins = with pkgs.tmuxPlugins; [
+      tokyo-night-tmux
+    ];
+    extraConfig = ''
+      set -sg escape-time 0
+    '';
   };
 
   programs.git = {
@@ -36,36 +58,56 @@
         format = "ssh";
       };
       commit = {
-        sign = "true";
+        sign = true;
+        gpgsign = true;
       };
       "gpg \"ssh\"" = {
-        program = "/opt/1Password/op-ssh-sign";
+        program = "${lib.getExe' pkgs._1password-gui "op-ssh-sign"}";
       };
     };
   };
 
+  programs.ssh = {
+    enable = true;
+    extraConfig = ''
+      Host *
+        IdentityAgent ${onePassPath}
+    '';
+  };
+
   programs.zsh = {
     enable = true;
+    autosuggestion = {
+      enable = true;
+    };
+    enableCompletion = true;
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "thefuck" "direnv"];
+      plugins = [
+        "git"
+        "tmux"
+        "thefuck"
+        "direnv"
+      ];
       theme = "af-magic";
     };
     shellAliases = {
       cbr = "cargo build -r";
       crr = "cargo run -r";
       flakers-init = "nix flake init -t github:DragonHuntrX/nix-templates#rust-stable";
+      rb = "sudo nixos-rebuild switch";
     };
     sessionVariables = {
       EDITOR = "hx";
     };
-    initExtra = ''
+    initExtra = '''';
+    initExtraFirst = ''
+      export ZSH_TMUX_AUTOSTART=true
     '';
+
   };
 
-
   home.stateVersion = "24.11";
-
 
   programs.home-manager.enable = true;
 
