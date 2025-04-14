@@ -72,6 +72,14 @@ in
     extraConfig = ''
       Host *
         IdentityAgent ${onePassPath}
+      Host git
+        Hostname github.com
+        User git
+        IdentityFile ~/.ssh/git.pub
+      Host jdsgit
+        Hostname github.com
+        User git
+        IdentityFile ~/.ssh/jdsgit.pub
     '';
   };
 
@@ -85,7 +93,7 @@ in
       enable = true;
       plugins = [
         "git"
-        "tmux"
+        # "tmux"
         "thefuck"
         "direnv"
       ];
