@@ -61,6 +61,15 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  services.ollama = {
+    enable = true;
+    acceleration = "cuda";
+    # Optional: preload models, see https://ollama.com/library
+    loadModels = [
+      "deepseek-r1:14b"
+    ];
+  };
+
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -127,6 +136,15 @@
       "1password-gui"
       "1password"
       "1password-cli"
+      "cuda"
+      "cuda_cudart"
+      "cudann"
+      "libcublas"
+      "cuda_cccl"
+      "cuda_nvcc"
+      "nvidia-x11"
+      "nvidia-settings"
+      "nvidia-persistenced"
     ];
 
   # Some programs need SUID wrappers, can be configured further or are

@@ -22,6 +22,21 @@ in
     virtualenv
   ];
 
+  programs.alacritty = {
+    enable = true;
+    settings = {
+
+      font = {
+        normal = {
+          family = "FiraCode Nerd Font";
+        };
+      };
+      general = {
+        import = [ pkgs.alacritty-theme.tokyo_night ];
+      };
+    };
+  };
+
   programs.helix = {
     enable = true;
     settings = {
@@ -39,10 +54,16 @@ in
   programs.tmux = {
     enable = true;
     plugins = with pkgs.tmuxPlugins; [
+      # tmux-nova
       tokyo-night-tmux
+      # nord
+      # onedark-theme
+      # catppuccin
+      weather
     ];
     extraConfig = ''
       set -sg escape-time 0
+      set -g default-terminal "alacritty"
     '';
   };
 

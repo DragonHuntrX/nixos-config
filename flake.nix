@@ -5,6 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     home-manager.url = "github:nix-community/home-manager/release-24.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
   };
 
   outputs =
@@ -12,6 +13,7 @@
       self,
       nixpkgs,
       home-manager,
+      alacritty-theme,
       ...
     }@inputs:
     {
@@ -20,12 +22,14 @@
         system = "x86_64-linux";
         modules = [
           {
-
+            nixpkgs.overlays = [ alacritty-theme.overlays.default ];
             networking.hostName = "infinity"; # Define your hostname.
           }
           # Import the previous configuration.nix we used,
           # so the old configuration file still takes effect
           ./configuration.nix
+          ./firefox.nix
+          ./gpusetup.nix
           ./hardware-configs/infinity.nix
           home-manager.nixosModules.home-manager
           {
