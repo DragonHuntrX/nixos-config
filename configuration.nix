@@ -122,6 +122,16 @@
   environment.shells = with pkgs; [ zsh ];
   programs.zsh.enable = true;
 
+  # Enable 1Password CLI and GUI
+  programs._1password = {
+    enable = true;
+  };
+  programs._1password-gui = {
+    enable = true;
+    # Enable PolKit for GUI access
+    polkitPolicyOwners = [ "ouroboros" ];
+  };
+
   # fonts.packages = with pkgs; [
   #   (nerdfonts.override { fonts = [ "FiraCode" ]; })
   #   fira-code
@@ -136,6 +146,7 @@
       "1password-gui"
       "1password"
       "1password-cli"
+      "opengl"
       "cuda"
       "cuda_cudart"
       "cudann"
@@ -145,6 +156,8 @@
       "nvidia-x11"
       "nvidia-settings"
       "nvidia-persistenced"
+      "obsidian"
+      "discord"
     ];
 
   # Some programs need SUID wrappers, can be configured further or are

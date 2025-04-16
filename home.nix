@@ -6,6 +6,7 @@
 }:
 let
   onePassPath = "~/.1password/agent.sock";
+
 in
 {
   home.username = "ouroboros";
@@ -15,11 +16,14 @@ in
     nmap
     cowsay
     gnome-terminal
-    direnv
     thefuck
+    darktable
+    direnv
+    xsel
+    discord
     _1password-cli
     _1password-gui
-    virtualenv
+    obsidian
   ];
 
   programs.alacritty = {
@@ -47,6 +51,11 @@ in
         name = "nix";
         auto-format = true;
         formatter.command = "${pkgs.nixfmt-rfc-style}/bin/nixfmt";
+      }
+      {
+        name = "python";
+        auto-format = true;
+        formatter.command = "${pkgs.python3Packages.black}/bin/black";
       }
     ];
   };
@@ -134,6 +143,11 @@ in
       export ZSH_TMUX_AUTOSTART=true
     '';
 
+  };
+
+  xsession.windowManager.i3.config.startup.alacritty = {
+    always = true;
+    command = "alacritty";
   };
 
   home.stateVersion = "24.11";

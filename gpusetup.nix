@@ -56,4 +56,6 @@
     # amdgpuBusId = "PCI:54:0:0"; For AMD GPU
   };
 
+  hardware.opengl.enable = true;
+
 }

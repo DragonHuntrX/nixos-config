@@ -62,6 +62,22 @@ in
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/1password-x-password-manager/latest.xpi";
             installation_mode = "force_installed";
           };
+          # Better canvas
+          "{8927f234-4dd9-48b1-bf76-44a9e153eee0}" = {
+            intstall_url = "https://addons.mozilla.org/firefox/downloads/latest/better-canvas/latest.xpi";
+            installation_mode = "force_installed";
+          };
+          # Canvas Tasks
+          "tasksforcanvas@jtchengdev.com" = {
+            intstall_url = "https://addons.mozilla.org/firefox/downloads/latest/tasks-for-canvas/latest.xpi";
+            installation_mode = "force_installed";
+          };
+          # Dark Reader
+          "addon@darkreader.org" = {
+            intstall_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
+            installation_mode = "force_installed";
+          };
+
         };
 
         # ---- PREFERENCES ----
