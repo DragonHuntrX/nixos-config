@@ -62,7 +62,7 @@
   services.printing.enable = true;
 
   services.ollama = {
-    enable = false;
+    enable = true;
     acceleration = "cuda";
     # Optional: preload models, see https://ollama.com/library
     loadModels = [
@@ -114,7 +114,6 @@
     openssl
     helix
     nil
-
     nixd
     git
     zsh
@@ -138,7 +137,7 @@
   #   fira-code
   # ];
   fonts.packages = with pkgs; [
-    nerd-fonts.fira-code
+    nerdfonts
   ];
 
   nixpkgs.config.allowUnfreePredicate =
@@ -150,7 +149,7 @@
       "opengl"
       "cuda"
       "cuda_cudart"
-      "cudnn"
+      "cudann"
       "libcublas"
       "cuda_cccl"
       "cuda_nvcc"

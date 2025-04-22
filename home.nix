@@ -13,19 +13,13 @@ in
   home.homeDirectory = "/home/ouroboros";
 
   home.packages = with pkgs; [
-    # Graphics tools
-    darktable
-    gimp
-
-    # Security tools
     nmap
-
-    # Cli tools
+    cowsay
+    gnome-terminal
     thefuck
+    darktable
     direnv
     xsel
-
-    # Utilities
     discord
     _1password-cli
     _1password-gui
