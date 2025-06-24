@@ -14,13 +14,19 @@ in
   home.homeDirectory = "/home/${user}";
 
   home.packages = with pkgs; [
-    nmap
-    cowsay
-    gnome-terminal
-    thefuck
+    # Graphics tools
     darktable
+    gimp
+
+    # Security tools
+    nmap
+
+    # Cli tools
+    thefuck
     direnv
     xsel
+
+    # Utilities
     discord
     _1password-cli
     _1password-gui

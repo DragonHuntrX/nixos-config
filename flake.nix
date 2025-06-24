@@ -2,11 +2,11 @@
   description = "My little Nix Flake";
   inputs = {
     # NixOS official package source, using the nixos-24.11 branch here
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
-    home-manager.url = "github:nix-community/home-manager/release-24.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    
+
     alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
   };
 
@@ -43,7 +43,9 @@
 
             # Optionally, use home-manager.extraSpecialArgs to pass
             # arguments to home.nix
-            home-manager.extraSpecialArgs = {user = "ouroboros";};
+            home-manager.extraSpecialArgs = {
+              user = "ouroboros";
+            };
           }
         ];
       };
@@ -71,7 +73,9 @@
 
             # Optionally, use home-manager.extraSpecialArgs to pass
             # arguments to home.nix
-            home-manager.extraSpecialArgs = {user = "nixos";};
+            home-manager.extraSpecialArgs = {
+              user = "nixos";
+            };
           }
         ];
       };
