@@ -13,17 +13,41 @@ in
   home.homeDirectory = "/home/ouroboros";
 
   home.packages = with pkgs; [
+    # Quick dev tools
+
+    # Security Tools
     nmap
+    cyberchef
+    wireshark
+
+    # Extra
     cowsay
-    gnome-terminal
     thefuck
-    darktable
+    bc
+
+    # Math utils
+    julia
+
+    # Cli utilites
+    magic-wormhole
     direnv
     xsel
+    transmission_4
+    openvpn
+
+    # Gui utilities
+    darktable
     discord
     _1password-cli
     _1password-gui
     obsidian
+    signal-desktop-bin
+    tor-browser
+
+    # Games
+    ferium
+    prismlauncher
+
   ];
 
   programs.alacritty = {
@@ -72,7 +96,13 @@ in
     ];
     extraConfig = ''
       set -sg escape-time 0
+      set -g mouse on
       set -g default-terminal "alacritty"
+
+      set -g @tokyo-night-tmux_show_hostname 1
+      set -g @tokyo-night-tmux_show_path 1
+      set -g @tokyo-night-tmux_path_format relative
+      set -g @tokyo-night-tmux_show_netspeed 1
     '';
   };
 
@@ -110,6 +140,10 @@ in
         Hostname github.com
         User git
         IdentityFile ~/.ssh/jdsgit.pub
+      Host csportal
+        Hostname portal.cs.virginia.edu
+        User chk6aa
+        IdentityFile ~/.ssh/csportal.pub
     '';
   };
 
@@ -134,14 +168,27 @@ in
       crr = "cargo run -r";
       flakers-init = "nix flake init -t github:DragonHuntrX/nix-templates#rust-stable";
       rb = "sudo nixos-rebuild switch";
+      factor = "~/tools/math-utils factor";
     };
     sessionVariables = {
       EDITOR = "hx";
     };
-    initExtra = '''';
-    initExtraFirst = ''
-      export ZSH_TMUX_AUTOSTART=true
-    '';
+
+    initContent =
+      let
+        pre = lib.mkBefore ''
+          math () {
+            julia -E "$*";
+          }
+        '';
+        post = lib.mkAfter ''
+          export ZSH_TMUX_AUTOSTART=true
+        '';
+      in
+      lib.mkMerge [
+        pre
+        post
+      ];
 
   };
 
@@ -151,6 +198,10 @@ in
   };
 
   home.stateVersion = "24.11";
+  home.sessionVariables = {
+    BROWSER = "${lib.getExe pkgs.firefox}";
+    EDITOR = "${lib.getExe pkgs.helix}";
+  };
 
   programs.home-manager.enable = true;
 

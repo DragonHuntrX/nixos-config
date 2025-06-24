@@ -2,8 +2,9 @@
   description = "My little Nix Flake";
   inputs = {
     # NixOS official package source, using the nixos-24.11 branch here
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
-    home-manager.url = "github:nix-community/home-manager/release-24.11";
+    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
   };
@@ -24,12 +25,16 @@
           {
             nixpkgs.overlays = [ alacritty-theme.overlays.default ];
             networking.hostName = "infinity"; # Define your hostname.
+
+            programs.nix-ld.enable = true;
           }
           # Import the previous configuration.nix we used,
           # so the old configuration file still takes effect
           ./configuration.nix
           ./firefox.nix
           ./gpusetup.nix
+          ./docker.nix
+          ./games.nix
           ./hardware-configs/infinity.nix
           home-manager.nixosModules.home-manager
           {

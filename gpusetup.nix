@@ -41,7 +41,8 @@
     nvidiaSettings = true;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidia_x11;
+
   };
 
   hardware.nvidia.prime = {
@@ -55,7 +56,5 @@
     nvidiaBusId = "PCI:1:0:0";
     # amdgpuBusId = "PCI:54:0:0"; For AMD GPU
   };
-
-  hardware.opengl.enable = true;
 
 }

@@ -58,6 +58,11 @@
     variant = "";
   };
 
+  # services.signald = {
+  #   enable = true;
+  #   user = "ouroboros";
+  # };
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -71,7 +76,7 @@
   };
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -96,6 +101,7 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "dialout"
     ];
     shell = pkgs.zsh;
     packages = with pkgs; [
@@ -136,9 +142,15 @@
   #   (nerdfonts.override { fonts = [ "FiraCode" ]; })
   #   fira-code
   # ];
-  fonts.packages = with pkgs; [
-    nerdfonts
-  ];
+  #
+  # fonts.packages = with pkgs; [
+  #   nerd-fonts.fira-code
+  #   nerd-fonts.noto
+  # ];
+
+  fonts.packages =
+    [ ]
+    ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
   nixpkgs.config.allowUnfreePredicate =
     pkg:
@@ -158,6 +170,10 @@
       "nvidia-persistenced"
       "obsidian"
       "discord"
+      "steam"
+      "steam-original"
+      "steam-unwrapped"
+      "steam-run"
     ];
 
   # Some programs need SUID wrappers, can be configured further or are
