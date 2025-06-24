@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  user,
   ...
 }:
 let
@@ -9,8 +10,8 @@ let
 
 in
 {
-  home.username = "ouroboros";
-  home.homeDirectory = "/home/ouroboros";
+  home.username = "${user}";
+  home.homeDirectory = "/home/${user}";
 
   home.packages = with pkgs; [
     nmap
@@ -24,6 +25,9 @@ in
     _1password-cli
     _1password-gui
     obsidian
+
+    typos-lsp
+
   ];
 
   programs.alacritty = {
@@ -57,7 +61,19 @@ in
         auto-format = true;
         formatter.command = "${pkgs.python3Packages.black}/bin/black";
       }
+      {
+        name = "markdown";
+        language-servers = [ "typos" ];
+      }
     ];
+    languages.language-server = {
+      typos = {
+        command = "${pkgs.typos-lsp}/bin/typos-lsp";
+        environment = {
+          "RUST_LOG" = "error";
+        };
+      };
+    };
   };
 
   programs.tmux = {
