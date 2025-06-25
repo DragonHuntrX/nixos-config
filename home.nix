@@ -20,10 +20,11 @@ in
     nmap
     cyberchef
     wireshark
+    checksec
 
     # Extra
     cowsay
-    thefuck
+    pay-respects
     bc
 
     # Math utils
@@ -173,7 +174,6 @@ in
       plugins = [
         "git"
         # "tmux"
-        "thefuck"
         "direnv"
       ];
       theme = "af-magic";
