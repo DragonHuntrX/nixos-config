@@ -23,7 +23,6 @@ in
 
     # Extra
     cowsay
-    thefuck
     bc
 
     # Math utils

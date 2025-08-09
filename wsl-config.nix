@@ -1,7 +1,13 @@
-{ pkgs, lib, config, ...}:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 let
-in {
-  
+in
+{
+
   users.users.nixos = {
     isNormalUser = true;
     description = "NixOS";
@@ -60,5 +66,4 @@ in {
     "flakes"
   ];
 
-  
 }

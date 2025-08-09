@@ -35,10 +35,9 @@
           # so the old configuration file still takes effect
           ./configuration.nix
           ./firefox.nix
-          ./gpusetup.nix
           ./docker.nix
           ./games.nix
-          ./hardware-configs/infinity.nix
+          ./hardware-configs/infinity2.nix
           home-manager.nixosModules.home-manager
           {
             # home-manager.backupFileExtension = "backup";
