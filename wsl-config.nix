@@ -34,13 +34,19 @@ in
   environment.shells = with pkgs; [ zsh ];
   programs.zsh.enable = true;
 
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    # Add any missing dynamic libraries for unpackaged programs
+    # here, NOT in environment.systemPackages
+  ];
+
   # Enable 1Password CLI and GUI
   programs._1password = {
     enable = true;
   };
-  fonts.packages = with pkgs; [
-    nerdfonts
-  ];
+  fonts.packages =
+    [ ]
+    ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
   nixpkgs.config.allowUnfreePredicate =
     pkg:

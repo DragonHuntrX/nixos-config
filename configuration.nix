@@ -52,6 +52,10 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
+  users.extraGroups.plugdev = { };
+
+  services.udev.packages = [ pkgs.openocd ];
+
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
@@ -70,14 +74,14 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  services.ollama = {
-    enable = false;
-    acceleration = "cuda";
-    # Optional: preload models, see https://ollama.com/library
-    loadModels = [
-      "deepseek-r1:14b"
-    ];
-  };
+  # services.ollama = {
+  #   enable = true;
+  #   acceleration = "cuda";
+  #   # Optional: preload models, see https://ollama.com/library
+  #   loadModels = [
+  #     "deepseek-r1:14b"
+  #   ];
+  # };
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -105,6 +109,18 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "dialout"
+    ];
+    shell = pkgs.zsh;
+    packages = with pkgs; [
+      #  thunderbird
+    ];
+  };
+  users.users.james = {
+    isNormalUser = true;
+    description = "James";
+    extraGroups = [
+      "plugdev"
       "dialout"
     ];
     shell = pkgs.zsh;
@@ -174,6 +190,7 @@
       "nvidia-x11"
       "nvidia-settings"
       "nvidia-persistenced"
+      "vscode"
       "obsidian"
       "discord"
       "steam"
