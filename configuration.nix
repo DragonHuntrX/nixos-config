@@ -14,6 +14,10 @@
     # Include the results of the hardware scan.
   ];
 
+  services.devmon.enable = true;
+  services.gvfs.enable = true;
+  services.udisks2.enable = true;
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -67,7 +71,7 @@
   services.printing.enable = true;
 
   services.ollama = {
-    enable = true;
+    enable = false;
     acceleration = "cuda";
     # Optional: preload models, see https://ollama.com/library
     loadModels = [
@@ -137,6 +141,8 @@
     # Enable PolKit for GUI access
     polkitPolicyOwners = [ "ouroboros" ];
   };
+
+  security.polkit.enable = true;
 
   # fonts.packages = with pkgs; [
   #   (nerdfonts.override { fonts = [ "FiraCode" ]; })

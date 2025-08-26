@@ -23,7 +23,7 @@ in
 
     # Extra
     cowsay
-    thefuck
+    pay-respects
     bc
 
     # Math utils
@@ -35,6 +35,8 @@ in
     xsel
     transmission_4
     openvpn
+    proxmark3
+    proxmark3-rrg
 
     # Gui utilities
     darktable
@@ -159,6 +161,18 @@ in
         Hostname portal.cs.virginia.edu
         User chk6aa
         IdentityFile ~/.ssh/csportal.pub
+      Host stoicdrive
+        Hostname stoic-driveway
+        User root
+        IdentityFile ~/.ssh/stoicdrive.pub
+      Host testbench
+        Hostname 192.168.1.83
+        User testbencher
+        IdentityFile ~/.ssh/testbench.pub
+      Host pwnc
+        Hostname pwn.college
+        User hacker
+        IdentityFile ~/.ssh/pwnc.pub
     '';
   };
 
@@ -183,6 +197,7 @@ in
       crr = "cargo run -r";
       flakers-init = "nix flake init -t github:DragonHuntrX/nix-templates#rust-stable";
       rb = "sudo nixos-rebuild switch";
+      econf = "hx ~/nixos-config/";
       factor = "~/tools/math-utils factor";
     };
     sessionVariables = {
