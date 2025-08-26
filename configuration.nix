@@ -143,6 +143,8 @@
     nixd
     git
     zsh
+
+    gnomeExtensions.pop-shell
   ];
 
   environment.shells = with pkgs; [ zsh ];
@@ -171,8 +173,7 @@
   # ];
 
   fonts.packages =
-    [ ]
-    ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+    [ ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
   nixpkgs.config.allowUnfreePredicate =
     pkg:

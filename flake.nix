@@ -5,6 +5,8 @@
     # nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
+
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -17,6 +19,7 @@
       nixpkgs,
       home-manager,
       alacritty-theme,
+      nixpkgs-stable,
       ...
     }@inputs:
     {
@@ -37,7 +40,7 @@
           ./firefox.nix
           ./docker.nix
           ./games.nix
-          ./hardware-configs/infinity2.nix
+          ./hardware-configs/infinity.nix
           home-manager.nixosModules.home-manager
           {
             # home-manager.backupFileExtension = "backup";
@@ -49,6 +52,7 @@
             # arguments to home.nix
             home-manager.extraSpecialArgs = {
               user = "ouroboros";
+              nixpkgs-stable = nixpkgs-stable.legacyPackages.x86_64-linux;
             };
           }
         ];

@@ -3,6 +3,7 @@
   lib,
   pkgs,
   user,
+  nixpkgs-stable,
   ...
 }:
 let
@@ -40,7 +41,7 @@ in
     proxmark3-rrg
 
     # Gui utilities
-    darktable
+    nixpkgs-stable.darktable
     discord
     _1password-cli
     _1password-gui
