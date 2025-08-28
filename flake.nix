@@ -37,10 +37,9 @@
           # Import the previous configuration.nix we used,
           # so the old configuration file still takes effect
           ./configuration.nix
-          ./firefox.nix
           ./docker.nix
-          ./games.nix
           ./hardware-configs/infinity.nix
+          ./gpusetup.nix
           home-manager.nixosModules.home-manager
           {
             # home-manager.backupFileExtension = "backup";

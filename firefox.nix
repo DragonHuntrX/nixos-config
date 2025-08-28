@@ -77,6 +77,11 @@ in
             intstall_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
             installation_mode = "force_installed";
           };
+          # Dark Reader
+          "{c3c10168-4186-445c-9c5b-63f12b8e2c87}" = {
+            intstall_url = "https://addons.mozilla.org/firefox/downloads/latest/cookie-editor/latest.xpi";
+            installation_mode = "force_installed";
+          };
 
         };
 

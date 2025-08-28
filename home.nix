@@ -11,21 +11,43 @@ let
 
 in
 {
+
+  imports = [
+    # ./firefox.nix
+  ];
+
   home.username = "${user}";
   home.homeDirectory = "/home/${user}";
 
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Adwaita-dark";
+      package = pkgs.gnome-themes-extra;
+    };
+  };
+
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+      gtk-theme = "Adwaita-dark";
+    };
+
+  };
+
   home.packages = with pkgs; [
-    # Quick dev tools
+    # School Stuff
+    rstudio
+    quartus-prime-lite
 
     # Security Tools
     nmap
+    wordlists
     cyberchef
     wireshark
     checksec
 
     # Extra
-    cowsay
-    pay-respects
     bc
 
     # Math utils
@@ -37,8 +59,6 @@ in
     xsel
     transmission_4
     openvpn
-    proxmark3
-    proxmark3-rrg
 
     # Gui utilities
     nixpkgs-stable.darktable
@@ -198,7 +218,9 @@ in
       crr = "cargo run -r";
       flakers-init = "nix flake init -t github:DragonHuntrX/nix-templates#rust-stable";
       rb = "sudo nixos-rebuild switch";
+      update = "rb";
       econf = "hx ~/nixos-config/";
+
       factor = "~/tools/math-utils factor";
     };
     sessionVariables = {

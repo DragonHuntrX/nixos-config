@@ -57,8 +57,8 @@
   services.udev.packages = [ pkgs.openocd ];
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -143,6 +143,7 @@
     nixd
     git
     zsh
+    firefox
 
     gnomeExtensions.pop-shell
   ];
@@ -194,10 +195,8 @@
       "vscode"
       "obsidian"
       "discord"
-      "steam"
-      "steam-original"
-      "steam-unwrapped"
-      "steam-run"
+      "quartus-prime-lite"
+      "quartus-prime-lite-unwrapped"
     ];
 
   # Some programs need SUID wrappers, can be configured further or are
