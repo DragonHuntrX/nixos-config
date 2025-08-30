@@ -41,7 +41,7 @@
           ./hardware-configs/infinity.nix
           ./gpusetup.nix
 
-          ./modules/wireguard.nix
+          ./modules/windscribe.nix
 
           home-manager.nixosModules.home-manager
           {

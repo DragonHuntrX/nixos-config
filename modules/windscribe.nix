@@ -18,14 +18,15 @@
 
         dns = [ "10.255.255.3" ];
 
-        privateKeyFile = [ /root/wireguard-keys/windscribe.key ];
+        privateKeyFile = "/root/wireguard-keys/windscribe.key";
 
         peers = [
           {
             publicKey = "5yBJlSpfxd8Hq4+X4ZD60MYc6tosaMh5inQwA18XCCk=";
-            allowedIps = [ "0.0.0.0/0" ];
-            endpoint = "${server_ip}:${server_port}";
-            preshared = [/root/wireguard-keys/windscribe-preshared.key];
+            allowedIPs = [ "0.0.0.0/0" ];
+            endpoint = "${server_ip}:${builtins.toString server_port}";
+            presharedKeyFile = "/root/wireguard-keys/windscribe-preshared.key";
+            persistentKeepalive = 25;
           }
         ];
 

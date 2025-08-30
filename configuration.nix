@@ -110,6 +110,7 @@
       "networkmanager"
       "wheel"
       "dialout"
+      "wireshark"
     ];
     shell = pkgs.zsh;
     packages = with pkgs; [
