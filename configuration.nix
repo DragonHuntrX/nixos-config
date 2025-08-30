@@ -116,18 +116,6 @@
       #  thunderbird
     ];
   };
-  users.users.james = {
-    isNormalUser = true;
-    description = "James";
-    extraGroups = [
-      "plugdev"
-      "dialout"
-    ];
-    shell = pkgs.zsh;
-    packages = with pkgs; [
-      #  thunderbird
-    ];
-  };
 
   # Install firefox.
   programs.firefox.enable = true;

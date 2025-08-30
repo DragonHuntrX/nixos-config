@@ -40,6 +40,9 @@
           ./docker.nix
           ./hardware-configs/infinity.nix
           ./gpusetup.nix
+
+          ./modules/wireguard.nix
+
           home-manager.nixosModules.home-manager
           {
             # home-manager.backupFileExtension = "backup";
