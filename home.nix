@@ -37,9 +37,6 @@ in
   };
 
   home.packages = with pkgs; [
-    # School Stuff
-    rstudio
-    quartus-prime-lite
 
     # Security Tools
     nmap

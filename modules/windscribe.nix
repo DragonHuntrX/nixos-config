@@ -5,6 +5,8 @@
   ...
 }:
 {
+  networking.firewall.checkReversePath = "loose";
+
   networking.wg-quick.interfaces =
     let
       server_ip = "bos-298-wg.whiskergalaxy.com";

@@ -3,6 +3,7 @@
   inputs = {
     # NixOS official package source, using the nixos-24.11 branch here
     # nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    #
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
@@ -11,6 +12,9 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
+
+    waveforms.url = "git+file:///home/ouroboros/nix/flakes/waveforms-flake";
+    waveforms.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -25,6 +29,7 @@
     {
       # Please replace my-nixos with your hostname
       nixosConfigurations.infinity = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; };
         system = "x86_64-linux";
         modules = [
           {
@@ -37,11 +42,15 @@
           # Import the previous configuration.nix we used,
           # so the old configuration file still takes effect
           ./configuration.nix
+          ./unfree.nix
           ./docker.nix
           ./hardware-configs/infinity.nix
           ./gpusetup.nix
 
           ./modules/windscribe.nix
+
+          inputs.waveforms.nixosModule
+          ({ users.users.ouroboros.extraGroups = [ "plugdev" ]; })
 
           home-manager.nixosModules.home-manager
           {
