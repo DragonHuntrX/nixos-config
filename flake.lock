@@ -196,28 +196,7 @@
         "home-manager": "home-manager",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_3",
-        "nixpkgs-stable": "nixpkgs-stable",
-        "waveforms": "waveforms"
-      }
-    },
-    "waveforms": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1755083353,
-        "narHash": "sha256-wuiCs2kab1525NRGCQaQyDpp8AFVrNkDshKTiqkHqrE=",
-        "owner": "liff",
-        "repo": "waveforms-flake",
-        "rev": "065776a6f1dcdaaac65e2adfc4abf8fe87332775",
-        "type": "github"
-      },
-      "original": {
-        "owner": "liff",
-        "repo": "waveforms-flake",
-        "type": "github"
+        "nixpkgs-stable": "nixpkgs-stable"
       }
     }
   },

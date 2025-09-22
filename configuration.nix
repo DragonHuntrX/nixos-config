@@ -107,10 +107,12 @@
     isNormalUser = true;
     description = "Ouroboros";
     extraGroups = [
+      "libvirtd"
       "networkmanager"
       "wheel"
       "dialout"
       "wireshark"
+      "vboxusers"
     ];
     shell = pkgs.zsh;
     packages = with pkgs; [
@@ -133,6 +135,8 @@
     git
     zsh
     firefox
+
+    virtualbox
 
     gnomeExtensions.pop-shell
   ];

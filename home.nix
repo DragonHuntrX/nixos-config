@@ -15,6 +15,9 @@ in
   imports = [
     # ./firefox.nix
     ./home-manager/zsh.nix
+    ./home-manager/helix.nix
+    ./home-manager/tmux.nix
+    ./home-manager/games.nix
   ];
 
   home.username = "${user}";
@@ -88,59 +91,6 @@ in
         import = [ pkgs.alacritty-theme.tokyo_night ];
       };
     };
-  };
-
-  programs.helix = {
-    enable = true;
-    settings = {
-      theme = "tokyonight";
-    };
-    languages.language = [
-      {
-        name = "nix";
-        auto-format = true;
-        formatter.command = "${pkgs.nixfmt-rfc-style}/bin/nixfmt";
-      }
-      {
-        name = "python";
-        auto-format = true;
-        formatter.command = "${pkgs.python3Packages.black}/bin/black";
-      }
-      {
-        name = "markdown";
-        language-servers = [ "typos" ];
-      }
-    ];
-    languages.language-server = {
-      typos = {
-        command = "${pkgs.typos-lsp}/bin/typos-lsp";
-        environment = {
-          "RUST_LOG" = "error";
-        };
-      };
-    };
-  };
-
-  programs.tmux = {
-    enable = true;
-    plugins = with pkgs.tmuxPlugins; [
-      # tmux-nova
-      tokyo-night-tmux
-      # nord
-      # onedark-theme
-      # catppuccin
-      weather
-    ];
-    extraConfig = ''
-      set -sg escape-time 0
-      set -g mouse on
-      set -g default-terminal "alacritty"
-
-      set -g @tokyo-night-tmux_show_hostname 1
-      set -g @tokyo-night-tmux_show_path 1
-      set -g @tokyo-night-tmux_path_format relative
-      set -g @tokyo-night-tmux_show_netspeed 1
-    '';
   };
 
   programs.git = {

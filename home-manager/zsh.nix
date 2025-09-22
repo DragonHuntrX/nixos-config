@@ -32,6 +32,7 @@
     };
     sessionVariables = {
       EDITOR = "hx";
+      # LIBVIRT_DEFAULT_URI = "qemu:///system";
     };
 
     initContent =

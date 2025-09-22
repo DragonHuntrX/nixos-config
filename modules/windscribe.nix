@@ -13,7 +13,8 @@
       server_port = 65142;
     in
     {
-      wg0 = {
+      windscribe = {
+        autostart = false;
         address = [ "100.94.83.255" ];
 
         listenPort = server_port;

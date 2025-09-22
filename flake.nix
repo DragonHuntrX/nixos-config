@@ -13,8 +13,6 @@
 
     alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
 
-    waveforms.url = "git+file:///home/ouroboros/nix/flakes/waveforms-flake";
-    waveforms.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -48,9 +46,9 @@
           ./gpusetup.nix
 
           ./modules/windscribe.nix
-
-          inputs.waveforms.nixosModule
-          ({ users.users.ouroboros.extraGroups = [ "plugdev" ]; })
+          ./modules/quartus.nix
+          ./modules/virtualbox.nix
+          ./modules/libvirtd.nix
 
           home-manager.nixosModules.home-manager
           {
