@@ -182,6 +182,12 @@
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 10d";
+  };
+
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"

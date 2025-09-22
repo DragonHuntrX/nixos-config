@@ -28,6 +28,11 @@
       update = "rb";
       econf = "hx ~/nixos-config/";
 
+      nr = "nix run";
+
+      # vpn-on = "sudo systemctl start wg-quick-windscribe.service";
+      # vpn-off = "sudo systemctl stop wg-quick-windscribe.service";
+
       factor = "~/tools/math-utils factor";
     };
     sessionVariables = {
@@ -38,10 +43,6 @@
     initContent =
       let
         pre = lib.mkBefore ''
-          math () {
-            julia -E "$*";
-          }
-
           fe() {
             local target="flake.nix"
             local dir="$PWD"
@@ -55,6 +56,14 @@
             done
 
             ''${EDITOR:-vim} "./flake.nix"
+          }
+
+          vpn() {
+            if systemctl is-active wg-quick-windscribe.service | grep -q 'inactive'; then
+              sudo systemctl start wg-quick-windscribe.service
+            else
+              sudo systemctl stop wg-quick-windscribe.service
+            fi
           }
         '';
         post = lib.mkAfter ''

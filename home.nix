@@ -17,7 +17,6 @@ in
     ./home-manager/zsh.nix
     ./home-manager/helix.nix
     ./home-manager/tmux.nix
-    ./home-manager/games.nix
   ];
 
   home.username = "${user}";
@@ -40,7 +39,6 @@ in
   };
 
   home.packages = with pkgs; [
-
     # Security Tools
     nmap
     wordlists
@@ -59,7 +57,8 @@ in
     direnv
     xsel
     transmission_4
-    openvpn
+    units
+    file
 
     # Gui utilities
     nixpkgs-stable.darktable
@@ -69,12 +68,11 @@ in
     obsidian
     signal-desktop-bin
     tor-browser
+    zathura
 
     # Games
     ferium
     prismlauncher
-
-    typos-lsp
 
   ];
 

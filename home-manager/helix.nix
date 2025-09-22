@@ -5,6 +5,15 @@
   ...
 }:
 {
+
+  home.packages = with pkgs; [
+    # Language servers
+    vhdl-ls
+    typos-lsp
+    marksman
+    markdown-oxide
+  ];
+
   programs.helix = {
     enable = true;
     settings = {
@@ -27,12 +36,11 @@
       {
         name = "python";
         auto-format = true;
-        formatter.command = "${pkgs.python3Packages.black}/bin/black";
       }
-      {
-        name = "markdown";
-        language-servers = [ "typos" ];
-      }
+      # {
+      #   name = "markdown";
+      #   language-servers = [ "typos" ];
+      # }
     ];
     languages.language-server = {
       typos = {

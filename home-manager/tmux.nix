@@ -5,24 +5,34 @@
     enable = true;
     plugins = with pkgs.tmuxPlugins; [
       # tmux-nova
-      tokyo-night-tmux
+      resurrect
+      continuum
       # nord
       # onedark-theme
       # catppuccin
+      tokyo-night-tmux
       weather
     ];
     extraConfig = ''
-            set -sg escape-time 0
-            set -g mouse on
-            set -g default-terminal "alacritty"
+      # Continuum
+      set -g @continuum-restore 'on'
+      set -g @continuum-boot 'on'
+      set -g @resurrect-processes '"hx->hx *"'
 
-            set -g @tokyo-night-tmux_show_hostname 1
-            set -g @tokyo-night-tmux_show_path 1
-            set -g @tokyo-night-tmux_path_format relative
-            set -g @tokyo-night-tmux_show_netspeed 1
+      set -sg escape-time 0
+      set -g mouse on
+      set -g default-terminal "alacritty"
 
-            # HELIX BINDINGS BEGIN
-            
+      set -g @tokyo-night-tmux_show_hostname 1
+      set -g @tokyo-night-tmux_show_path 1
+      set -g @tokyo-night-tmux_path_format relative
+      set -g @tokyo-night-tmux_show_netspeed 1
+
+      # tmux set -g status-right "$battery_status$current_path$cmus_status$netspeed$git_status$wb_git_status$date_and_time"
+      # set -g status-right 'Continuum status: #{continuum_status}'
+
+      # HELIX BINDINGS BEGIN
+
       set-option -g @mode 'normal'
       set-option -g @current_keys '''
       bind-key -T copy-mode-vi C-d {
@@ -54,7 +64,7 @@
             %hidden selection_forward='#{&&:#{==:#{copy_cursor_x},#{E:selection_latest_x}},#{==:#{E:copy_cursor_y_abs},#{E:selection_latest_y}}}'
             %hidden selection_height='#{?#{>:#{selection_start_y},#{selection_end_y}},#{e|-|:#{selection_start_y},#{selection_end_y}},#{e|-|:#{selection_end_y},#{selection_start_y}}}'
             %hidden selection_oneline='#{==:#{selection_start_y},#{selection_end_y}}'
-            
+
             if -F '#{!=:#{E:selection_forward},1}' {
               send -X other-end
             }
@@ -81,13 +91,13 @@
             %hidden selection_forward='#{&&:#{==:#{copy_cursor_x},#{E:selection_latest_x}},#{==:#{E:copy_cursor_y_abs},#{E:selection_latest_y}}}'
             %hidden selection_height='#{?#{>:#{selection_start_y},#{selection_end_y}},#{e|-|:#{selection_start_y},#{selection_end_y}},#{e|-|:#{selection_end_y},#{selection_start_y}}}'
             %hidden selection_oneline='#{==:#{selection_start_y},#{selection_end_y}}'
-            
+
             if -F '#{!=:#{E:selection_oneline},1}' {
               if -F '#{==:#{E:selection_height},1}' {
                 if -F '#{E:selection_forward}' {
-            
+
                 } {
-            
+
                 } 
               } {
                 if -F '#{E:selection_forward}' {
@@ -125,7 +135,7 @@
             %hidden selection_forward='#{&&:#{==:#{copy_cursor_x},#{E:selection_latest_x}},#{==:#{E:copy_cursor_y_abs},#{E:selection_latest_y}}}'
             %hidden selection_height='#{?#{>:#{selection_start_y},#{selection_end_y}},#{e|-|:#{selection_start_y},#{selection_end_y}},#{e|-|:#{selection_end_y},#{selection_start_y}}}'
             %hidden selection_oneline='#{==:#{selection_start_y},#{selection_end_y}}'
-            
+
             if -F '#{E:selection_forward}' {
               send -X end-of-line
               send -X other-end
@@ -144,7 +154,7 @@
       }
       bind-key -T copy-mode-vi [ {
         set-option -Fp @current_keys '#{@current_keys} ['
-        
+
         if-shell -F '#{!=:#{m|r:^ \[$,#{@current_keys}},1}' {
           set-option -up @current_keys
         }
@@ -163,7 +173,7 @@
       }
       bind-key -T copy-mode-vi ] {
         set-option -Fp @current_keys '#{@current_keys} ]'
-        
+
         if-shell -F '#{!=:#{m|r:^ ]$,#{@current_keys}},1}' {
           set-option -up @current_keys
         }
@@ -316,13 +326,13 @@
             %hidden selection_forward='#{&&:#{==:#{copy_cursor_x},#{E:selection_latest_x}},#{==:#{E:copy_cursor_y_abs},#{E:selection_latest_y}}}'
             %hidden selection_height='#{?#{>:#{selection_start_y},#{selection_end_y}},#{e|-|:#{selection_start_y},#{selection_end_y}},#{e|-|:#{selection_end_y},#{selection_start_y}}}'
             %hidden selection_oneline='#{==:#{selection_start_y},#{selection_end_y}}'
-            
+
             if -F '#{!=:#{E:selection_oneline},1}' {
               if -F '#{==:#{E:selection_height},1}' {
                 if -F '#{E:selection_forward}' {
-            
+
                 } {
-            
+
                 } 
               } {
                 if -F '#{E:selection_forward}' {
@@ -354,7 +364,7 @@
             %hidden selection_forward='#{&&:#{==:#{copy_cursor_x},#{E:selection_latest_x}},#{==:#{E:copy_cursor_y_abs},#{E:selection_latest_y}}}'
             %hidden selection_height='#{?#{>:#{selection_start_y},#{selection_end_y}},#{e|-|:#{selection_start_y},#{selection_end_y}},#{e|-|:#{selection_end_y},#{selection_start_y}}}'
             %hidden selection_oneline='#{==:#{selection_start_y},#{selection_end_y}}'
-            
+
             if -F '#{E:selection_forward}' {
               send -X other-end
             } 

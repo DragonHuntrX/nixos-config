@@ -13,6 +13,9 @@
 
     alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
 
+    paperclips.url = "path:./games/paperclips";
+    paperclips.inputs.nixpkgs.follows = "nixpkgs";
+
   };
 
   outputs =
@@ -22,6 +25,7 @@
       home-manager,
       alacritty-theme,
       nixpkgs-stable,
+      paperclips,
       ...
     }@inputs:
     {
@@ -47,8 +51,12 @@
 
           ./modules/windscribe.nix
           ./modules/quartus.nix
-          ./modules/virtualbox.nix
           ./modules/libvirtd.nix
+
+          paperclips.nixosModules.universal-paperclips
+          {
+            enable = true;
+          }
 
           home-manager.nixosModules.home-manager
           {

@@ -55,6 +55,7 @@
               fi
             '';
           };
+          ${pname} = self.packages.${pkgs.system}.default;
         }
       );
 
@@ -66,7 +67,8 @@
           ...
         }:
         let
-          cfg = config.programs.universal-paperclips;
+          # cfg = config.programs.universal-paperclips;
+          cfg = config;
           wrappedBin =
             let
               flags = lib.concatStringsSep " " cfg.extraArgs;
@@ -76,7 +78,9 @@
             '';
         in
         {
-          options.programs.universal-paperclips = {
+
+          # options.programs.universal-paperclips = {
+          options = {
             enable = lib.mkEnableOption "Universal Paperclips (Electron)";
 
             package = lib.mkOption {

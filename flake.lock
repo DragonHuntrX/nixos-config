@@ -190,13 +190,30 @@
         "type": "github"
       }
     },
+    "paperclips": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "path": "./games/paperclips",
+        "type": "path"
+      },
+      "original": {
+        "path": "./games/paperclips",
+        "type": "path"
+      },
+      "parent": []
+    },
     "root": {
       "inputs": {
         "alacritty-theme": "alacritty-theme",
         "home-manager": "home-manager",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_3",
-        "nixpkgs-stable": "nixpkgs-stable"
+        "nixpkgs-stable": "nixpkgs-stable",
+        "paperclips": "paperclips"
       }
     }
   },
