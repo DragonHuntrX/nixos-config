@@ -37,6 +37,25 @@
         name = "python";
         auto-format = true;
       }
+      {
+        name = "latex";
+        auto-format = true;
+        formatter = {
+          command = lib.getExe pkgs.tex-fmt;
+          args = [ "--stdin" ];
+        };
+        language-servers = [
+          "texlab"
+          "typos"
+        ];
+      }
+      {
+        name = "spellcheck";
+        language-servers = [ "typos" ];
+        scope = "text.spellcheck";
+        file-types = [ ];
+
+      }
       # {
       #   name = "markdown";
       #   language-servers = [ "typos" ];
@@ -48,6 +67,16 @@
         environment = {
           "RUST_LOG" = "error";
         };
+      };
+      julia = {
+        command = "julia";
+        args = [
+          "--project=@LanguageServer"
+          "--startup-file=no"
+          "--history-file=no"
+          "-e"
+          "using LanguageServer; runserver()"
+        ];
       };
     };
   };

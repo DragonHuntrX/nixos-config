@@ -24,6 +24,10 @@
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
+  networking.hosts = {
+    "10.10.11.221" = [ "2million.htb" ];
+  };
+
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -139,6 +143,7 @@
     virtualbox
 
     gnomeExtensions.pop-shell
+    gnomeExtensions.wallpaper-slideshow
   ];
 
   environment.shells = with pkgs; [ zsh ];
@@ -193,8 +198,8 @@
     "flakes"
   ];
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [ 80 ];
+  networking.firewall.allowedUDPPorts = [ ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 

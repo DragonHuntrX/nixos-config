@@ -72,7 +72,8 @@ let
       export LD_LIBRARY_PATH="/lib32:/lib:/usr/lib"
     '';
     runScript = ''
-      ${quartus20Home}/quartus/bin/quartus
+      # ${quartus20Home}/quartus/bin/quartus
+      /bin/bash
     '';
   };
 in

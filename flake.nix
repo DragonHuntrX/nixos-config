@@ -53,6 +53,9 @@
           ./modules/quartus.nix
           ./modules/libvirtd.nix
 
+          ./containers/config.nix
+          ./containers/ctf.nix
+
           paperclips.nixosModules.universal-paperclips
           {
             enable = true;
