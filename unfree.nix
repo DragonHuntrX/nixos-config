@@ -22,5 +22,8 @@
 
       "waveforms"
       "adept2-runtime"
+
+      "steam"
+      "steam-unwrapped"
     ];
 }

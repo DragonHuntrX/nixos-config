@@ -7,16 +7,17 @@
   ...
 }:
 let
-  onePassPath = "~/.1password/agent.sock";
-
+  nixpkgs.overlays = [ (import ./overlays/1password.nix) ];
 in
 {
-
   imports = [
     # ./firefox.nix
     ./home-manager/zsh.nix
     ./home-manager/helix.nix
     ./home-manager/tmux.nix
+    ./home-manager/ssh.nix
+    ./home-manager/hypr.nix
+    ./home-manager/tidal.nix
   ];
 
   home.username = "${user}";
@@ -51,14 +52,16 @@ in
     nmap
     wordlists
     cyberchef
-    wireshark
     checksec
+    rustscan
+    nuclei
+    binwalk
 
     # Extra
     bc
 
     # Math utils
-    julia
+    julia-bin
 
     # Cli utilites
     magic-wormhole
@@ -67,6 +70,15 @@ in
     transmission_4
     units
     file
+    unzip
+    openconnect
+    glow
+    yazi
+    bacon
+    codex
+
+    # Containerization
+    podman
 
     # Gui utilities
     nixpkgs-stable.darktable
@@ -77,10 +89,20 @@ in
     signal-desktop-bin
     tor-browser
     zathura
+    obs-studio
+    gimp
+    qimgv
 
     # Games
     ferium
     prismlauncher
+
+    # steam
+    # mesa
+
+    # Privacy
+    tor
+    torsocks
 
   ];
 
@@ -117,50 +139,23 @@ in
       "gpg \"ssh\"" = {
         program = "${lib.getExe' pkgs._1password-gui "op-ssh-sign"}";
       };
+      pull.rebase = false;
     };
   };
 
-  programs.ssh = {
+  wayland.windowManager.hyprland = {
     enable = true;
-    extraConfig = ''
-      Host *
-        IdentityAgent ${onePassPath}
-      Host git
-        Hostname github.com
-        User git
-        IdentityFile ~/.ssh/git.pub
-      Host jdsgit
-        Hostname github.com
-        User git
-        IdentityFile ~/.ssh/jdsgit.pub
-      Host csportal
-        Hostname portal.cs.virginia.edu
-        User chk6aa
-        IdentityFile ~/.ssh/csportal.pub
-      Host stoicdrive
-        Hostname stoic-driveway
-        User root
-        IdentityFile ~/.ssh/stoicdrive.pub
-      Host testbench
-        Hostname 192.168.1.83
-        User testbencher
-        IdentityFile ~/.ssh/testbench.pub
-      Host pwnc
-        Hostname pwn.college
-        User hacker
-        IdentityFile ~/.ssh/pwnc.pub
-    '';
-  };
+    systemd.enable = false;
+    systemd.variables = [ "--all" ];
 
-  xsession.windowManager.i3.config.startup.alacritty = {
-    always = true;
-    command = "alacritty";
   };
 
   home.stateVersion = "24.11";
   home.sessionVariables = {
     BROWSER = "${lib.getExe pkgs.firefox}";
     EDITOR = "${lib.getExe pkgs.helix}";
+    NIXOS_OZONE_WL = 1;
+    OBSIDIAN_USE_WAYLAND = 1;
   };
 
   programs.home-manager.enable = true;

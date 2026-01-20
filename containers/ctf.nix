@@ -8,8 +8,8 @@
   containers.ctf = {
     autoStart = false; # set true if you want it started at boot
     privateNetwork = true; # share host network by default (change if you want isolation)
-    hostAddress = "192.168.100.10";
-    localAddress = "192.168.100.11";
+    hostAddress = "10.0.0.1";
+    localAddress = "10.0.0.100";
     hostAddress6 = "fc00::1";
     localAddress6 = "fc00::2";
 
@@ -40,6 +40,9 @@
           home = "/home/ctf";
           extraGroups = [ "wheel" ];
           initialPassword = "ctfpassword"; # replace / or use hashedPassword for production
+          openssh.authorizedKeys.keys = [
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN3SWmxiU6F2gZuIHKV3MmvlCNNYwg+gMW+DUVfcJFeN"
+          ];
         };
 
         # Tools: pentest / reversing / analysis / misc. tweak as you like

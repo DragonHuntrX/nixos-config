@@ -5,8 +5,11 @@
     # nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     #
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-25.11";
+    # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.11";
+
+    nixpkgs-nm.url = "github:NixOS/nixpkgs/0bd7f95e4588643f2c2d403b38d8a2fe44b0fc73";
 
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -15,6 +18,11 @@
 
     paperclips.url = "path:./games/paperclips";
     paperclips.inputs.nixpkgs.follows = "nixpkgs";
+
+    hyprlauncher.url = "github:/hyprwm/hyprlauncher";
+
+    # binja.url = "path:~/programs/binaryninja";
+    # binja.inputs.nixpkgs.follows = "nixpkgs";
 
   };
 
@@ -26,6 +34,7 @@
       alacritty-theme,
       nixpkgs-stable,
       paperclips,
+      # binja,
       ...
     }@inputs:
     {
@@ -40,6 +49,7 @@
             networking.hostName = "infinity"; # Define your hostname.
 
             programs.nix-ld.enable = true;
+
           }
           # Import the previous configuration.nix we used,
           # so the old configuration file still takes effect
@@ -52,8 +62,12 @@
           ./modules/windscribe.nix
           ./modules/quartus.nix
           ./modules/libvirtd.nix
+          ./modules/tailscale.nix
+          ./modules/htb.nix
+          ./modules/hyprland.nix
 
           ./containers/config.nix
+          ./containers/portfolio.nix
           ./containers/ctf.nix
 
           paperclips.nixosModules.universal-paperclips

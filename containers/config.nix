@@ -12,5 +12,6 @@
     externalInterface = "wlp0s20f3";
     # Lazy IPv6 connectivity for the container
     enableIPv6 = true;
+    internalIPs = [ "10.0.0.0/8" ];
   };
 }

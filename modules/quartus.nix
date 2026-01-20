@@ -17,6 +17,7 @@ let
         # common 64-bit libs Quartus/Java/Tk bits may touch
         zlib
         glibc
+        libtool
         glib
         libxml2
         fontconfig
@@ -33,6 +34,8 @@ let
         xorg.libICE
         libxcrypt-legacy
         gtk2
+        zlib
+        zlib.dev
         alsa-lib
       ];
     # 32-bit side for ModelSim Starter (20.x era)
@@ -42,7 +45,12 @@ let
         glibc.dev
 
         glib
+        glib.dev
+        gcc.libc
         stdenv
+        stdenv.cc.cc.lib
+        stdenv.cc.cc
+        stdenv.cc
         ncurses5
         zlib
         zlib.dev
@@ -70,6 +78,7 @@ let
 
     profile = ''
       export LD_LIBRARY_PATH="/lib32:/lib:/usr/lib"
+      export PATH=$PATH:${quartus20Home}/quartus/bin:${quartus20Home}/modelsim_ase/bin
     '';
     runScript = ''
       # ${quartus20Home}/quartus/bin/quartus

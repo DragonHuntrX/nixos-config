@@ -12,6 +12,7 @@
     typos-lsp
     marksman
     markdown-oxide
+    texlab
   ];
 
   programs.helix = {

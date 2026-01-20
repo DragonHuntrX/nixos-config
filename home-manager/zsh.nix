@@ -15,11 +15,11 @@
       enable = true;
       plugins = [
         "git"
-        # "tmux"
         "direnv"
       ];
       theme = "af-magic";
     };
+
     shellAliases = {
       cbr = "cargo build -r";
       crr = "cargo run -r";
@@ -29,9 +29,9 @@
       econf = "hx ~/nixos-config/";
 
       nr = "nix run";
+      da = "direnv allow";
 
-      # vpn-on = "sudo systemctl start wg-quick-windscribe.service";
-      # vpn-off = "sudo systemctl stop wg-quick-windscribe.service";
+      ts = "tailscale";
 
       factor = "~/tools/math-utils factor";
     };
@@ -43,6 +43,7 @@
     initContent =
       let
         pre = lib.mkBefore ''
+
           fe() {
             local target="flake.nix"
             local dir="$PWD"
@@ -58,6 +59,18 @@
             ''${EDITOR:-vim} "./flake.nix"
           }
 
+          grab() {
+            mv $1 .
+          }
+
+          function y() {
+          	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+          	yazi "$@" --cwd-file="$tmp"
+          	IFS= read -r -d '''''' cwd < "$tmp"
+          	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+          	rm -f -- "$tmp"
+          }
+
           vpn() {
             if systemctl is-active wg-quick-windscribe.service | grep -q 'inactive'; then
               sudo systemctl start wg-quick-windscribe.service
@@ -67,7 +80,8 @@
           }
         '';
         post = lib.mkAfter ''
-          export ZSH_TMUX_AUTOSTART=true
+          autoload zmv
+          ${lib.getExe pkgs.neofetch}
         '';
       in
       lib.mkMerge [
