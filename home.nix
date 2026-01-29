@@ -76,6 +76,7 @@ in
     yazi
     bacon
     codex
+    sox
 
     # Containerization
     podman

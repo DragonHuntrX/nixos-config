@@ -26,6 +26,13 @@
           insert = "bar";
           select = "underline";
         };
+        lsp = {
+          display-inlay-hints = true;
+        };
+        inline-diagnostics = {
+          cursor-line = "hint";
+          other-lines = "warning";
+        };
       };
     };
     languages.language = [

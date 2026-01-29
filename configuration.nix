@@ -9,14 +9,6 @@
   inputs,
   ...
 }:
-let
-  # pkgsnm = import (fetchTarball {
-  #   url = "https://github.com/NixOS/nixpkgs/archive/0bd7f95e4588643f2c2d403b38d8a2fe44b0fc73.tar.gz";
-  #   sha256 = "0vx2pw69if88nkfh74bf1a8s5497n2nv7wydmvmqh5qh00fsahvq";
-  # }) { system = "x86_64-linux"; };
-
-  # my-nm = pkgsnm.networkmanager;
-in
 {
   imports = [
     # Include the results of the hardware scan.
@@ -60,22 +52,14 @@ in
     enable = true;
   };
 
-  # Force wpa_supplicant to use old openssl
-  # nixpkgs.config.permittedInsecurePackages = [
-  #   "openssl-1.1.1w"
-  # ];
-  # nixpkgs.overlays = [
-  #   (self: super: {
-  #     wpa_supplicant = super.wpa_supplicant.override {
-  #       openssl = super.openssl_1_1;
-  #     };
-  #   })
-  # ];
-
   # Enable networking
   networking.networkmanager.enable = true;
 
-  services.cryptography.policies.policy = "LEGACY";
+  # nixpkgs.config.packageOverrides = pkgs: rec {
+  #   wpa_supplicant = pkgs.wpa_supplicant.overrideAttrs (attrs: {
+  #     patches = attrs.patches ++ [ ./eduroam.patch ];
+  #   });
+  # };
 
   services.openvpn.servers = {
     cnsVPN = {
@@ -113,7 +97,7 @@ in
   services.udev.packages = [ pkgs.openocd ];
 
   # Enable the GNOME Desktop Environment.
-  services.displayManager.gdm.enable = true;
+  # services.displayManager.gdm.enable = true;
   # services.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
@@ -180,6 +164,8 @@ in
       #  thunderbird
     ];
   };
+
+  programs.niri.enable = true;
 
   nix.settings.trusted-users = [
     "root"

@@ -5,9 +5,12 @@
     # nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     #
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-25.11";
-    # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.11";
+
+    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    # nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    # nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.11";
 
     nixpkgs-nm.url = "github:NixOS/nixpkgs/0bd7f95e4588643f2c2d403b38d8a2fe44b0fc73";
 
@@ -65,6 +68,8 @@
           ./modules/tailscale.nix
           ./modules/htb.nix
           ./modules/hyprland.nix
+          # ./modules/niri.nix
+          ./modules/incus.nix
 
           ./containers/config.nix
           ./containers/portfolio.nix

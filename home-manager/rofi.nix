@@ -1,6 +1,17 @@
 { config, pkgs, ... }:
 {
 
+  # programs.rofi = {
+  #   enable = true;
+  #   plugins = [
+  #     pkgs.rofi-emoji
+  #     pkgs.rofi-calc
+  #   ];
+  #   extraConfig = {
+
+  #   };
+  # };
+
   home.file.".config/rofi/config.rasi".text = ''
     configuration{
         modi: ["drun", "window", "run"];

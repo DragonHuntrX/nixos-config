@@ -45,6 +45,7 @@
 
     wl-clipboard
     rofi
+    rofi-emoji
     lm_sensors
 
     thunar
